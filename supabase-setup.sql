@@ -11,6 +11,10 @@ create table if not exists public.items (
 
 alter table public.items enable row level security;
 
+grant usage on schema public to anon, authenticated;
+grant select on public.items to anon, authenticated;
+grant insert, delete on public.items to authenticated;
+
 create policy "public read"  on public.items for select using (true);
 create policy "admin insert" on public.items for insert to authenticated with check (true);
 create policy "admin delete" on public.items for delete to authenticated using (true);

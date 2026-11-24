@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Album design demos</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:32px 20px 48px;background:#111116;color:#f5f2ee;font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{max-width:1180px;margin:0 auto 28px}
+h1{font-size:clamp(28px,5vw,44px);line-height:1.05;margin:0 0 8px;letter-spacing:-.04em}
+header p{margin:0;color:#b9b5b3}
+.grid{max-width:1180px;margin:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.demo{padding:10px;border:1px solid #ffffff20;border-radius:22px;background:#ffffff08;transition:.2s}
+.demo.selected{border-color:#ff6677;box-shadow:0 0 0 2px #ff667755}
+.label{display:flex;align-items:center;justify-content:space-between;padding:4px 5px 12px}
+.label h2{margin:0;font-size:16px}
+.label span{font-size:11px;color:#b9b5b3}
+.screen{height:590px;overflow:auto;border-radius:16px;padding:20px;position:relative}
+.eyebrow{font-size:10px;letter-spacing:.22em;text-transform:uppercase;opacity:.72}
+.title{font-size:38px;line-height:.95;margin:7px 0 18px}
+.player{display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;margin-bottom:24px}
+.cover{width:72px;height:72px;flex:none;border-radius:12px;background:linear-gradient(145deg,#fa6277,#2a1220 70%);position:relative;overflow:hidden}
+.cover:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(130deg,transparent 0 10px,#fff2 11px 12px)}
+.song{font-weight:700;font-size:14px}.artist{font-size:11px;opacity:.65}
+.play{margin-left:auto;font-size:20px}
+.section{display:flex;justify-content:space-between;align-items:baseline;margin:20px 0 10px}
+.section strong{font-size:18px}.section small{font-size:10px;opacity:.65}
+.photos{columns:2;column-gap:8px}
+.photo{height:118px;margin:0 0 8px;border-radius:10px;break-inside:avoid;background:linear-gradient(145deg,#f5b0a7,#762d42 55%,#161622)}
+.photo:nth-child(2){height:86px;background:linear-gradient(135deg,#fcda9a,#cf6758 55%,#40223a)}
+.photo:nth-child(3){height:145px;background:linear-gradient(135deg,#a8dae3,#426f85 50%,#162438)}
+.photo:nth-child(4){height:100px;background:linear-gradient(135deg,#f9c4da,#c86288 55%,#452640)}
+.photo:nth-child(5){height:92px;background:linear-gradient(135deg,#f8dcab,#bd885c 55%,#3d3b53)}
+.track{padding:9px 0;border-bottom:1px solid #8883;font-size:12px;display:flex;justify-content:space-between}
+.mocknav{margin-top:16px;padding:10px;border-radius:20px;text-align:center;font-size:10px;letter-spacing:.04em}
+button{width:100%;margin-top:10px;border:1px solid #ffffff25;border-radius:12px;padding:11px;background:#ffffff10;color:inherit;font:600 13px system-ui;cursor:pointer}
+.cinematic .screen{background:radial-gradient(ellipse at 100% 0,#e5202f38,transparent 48%),#09090d;color:#faf8f8}
+.cinematic .title{font-family:Impact,"Arial Narrow",sans-serif;letter-spacing:.01em;text-transform:uppercase}
+.cinematic .player{background:linear-gradient(145deg,#ed3347,#71121e);box-shadow:0 10px 24px #e5202f45}
+.cinematic .mocknav{background:#242329;color:#fff}
+.scrapbook .screen{background-color:#f1e4ce;background-image:radial-gradient(#9d76501a .8px,transparent .8px);background-size:8px 8px;color:#45362d}
+.scrapbook .eyebrow{color:#9e5849;font-weight:700}
+.scrapbook .title{font-family:"Brush Script MT","Segoe Script",cursive;font-size:43px;transform:rotate(-2deg)}
+.scrapbook .player{background:#fffaf0;box-shadow:0 4px 10px #684a3028;border:1px solid #d8c6a9}
+.scrapbook .cover{border:4px solid white;box-shadow:0 2px 6px #0003}
+.scrapbook .photo{border:5px solid #fffdf6;border-bottom-width:14px;box-shadow:0 3px 7px #523b282b;border-radius:2px;transform:rotate(-1deg)}
+.scrapbook .photo:nth-child(even){transform:rotate(1.5deg)}
+.scrapbook .mocknav{background:#e2d0b1}
+.editorial .screen{background:#f8f6f1;color:#20201e}
+.editorial .eyebrow{letter-spacing:.28em;color:#876650}
+.editorial .title{font:500 42px/.95 Georgia,serif;letter-spacing:-.06em}
+.editorial .player{background:#ebe7df;border-radius:4px}
+.editorial .cover{border-radius:3px;filter:saturate(.7)}
+.editorial .section strong{font:500 21px Georgia,serif}
+.editorial .photo{border-radius:2px;filter:saturate(.78)}
+.editorial .mocknav{background:#e9e5dc;border-radius:4px}
+#choice{max-width:1180px;margin:18px auto 0;color:#ffd9de;min-height:24px}
+@media(max-width:850px){.grid{grid-template-columns:1fr}.demo{max-width:440px;width:100%;margin:auto}.screen{height:540px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Album ke teen looks</h1>
+  <p>Har demo mein photos, player aur playlist ka mood dekho. Jo pasand aaye, uska button dabao.</p>
+</header>
+<main class="grid">
+  <article class="demo">
+    <div class="label"><h2>1. Cinematic</h2><span>Dark · dramatic · red glow</span></div>
+    <div class="screen cinematic">
+      <div class="eyebrow">A collection of moments</div><div class="title">Memory<br>Album</div>
+      <div class="player"><div class="cover"></div><div><div class="song">Midnight Memories</div><div class="artist">My Playlist · now playing</div></div><div class="play">Ⅱ</div></div>
+      <div class="section"><strong>Photos</strong><small>12 MOMENTS</small></div>
+      <div class="photos"><div class="photo"></div><div class="photo"></div><div class="photo"></div><div class="photo"></div><div class="photo"></div></div>
+      <div class="section"><strong>Playlist</strong><small>03 TRACKS</small></div>
+      <div class="track"><span>01 &nbsp; Afterglow</span><span>•••</span></div><div class="track"><span>02 &nbsp; City lights</span><span>•••</span></div>
+      <div class="mocknav">⌂ &nbsp;&nbsp; Photos &nbsp;&nbsp; + &nbsp;&nbsp; Music</div>
+    </div>
+    <button type="button" data-choice="Cinematic">Choose Cinematic</button>
+  </article>
+  <article class="demo">
+    <div class="label"><h2>2. Scrapbook</h2><span>Warm · personal · handmade</span></div>
+    <div class="screen scrapbook">
+      <div class="eyebrow">little things, kept forever</div><div class="title">Our little<br>world</div>
+      <div class="player"><div class="cover"></div><div><div class="song">The song we love</div><div class="artist">A little soundtrack</div></div><div class="play">Ⅱ</div></div>
+      <div class="section"><strong>Snapshots</strong><small>12 KEEPSAKES</small></div>
+      <div class="photos"><div class="photo"></div><div class="photo"></div><div class="photo"></div><div class="photo"></div><div class="photo"></div></div>
+      <div class="section"><strong>Our songs</strong><small>PLAYLIST</small></div>
+      <div class="track"><span>01 &nbsp; Golden hour</span><span>♡</span></div><div class="track"><span>02 &nbsp; Home again</span><span>♡</span></div>
+      <div class="mocknav">HOME &nbsp;&nbsp; PHOTOS &nbsp;&nbsp; + &nbsp;&nbsp; MUSIC</div>
+    </div>
+    <button type="button" data-choice="Scrapbook">Choose Scrapbook</button>
+  </article>
+  <article class="demo">
+    <div class="label"><h2>3. Editorial</h2><span>Clean · elegant · magazine</span></div>
+    <div class="screen editorial">
+      <div class="eyebrow">THE MEMORY ARCHIVE · VOL. 01</div><div class="title">Days worth<br>remembering.</div>
+      <div class="player"><div class="cover"></div><div><div class="song">A familiar melody</div><div class="artist">Selected soundtrack</div></div><div class="play">Ⅱ</div></div>
+      <div class="section"><strong>Collected moments</strong><small>12 PHOTOGRAPHS</small></div>
+      <div class="photos"><div class="photo"></div><div class="photo"></div><div class="photo"></div><div class="photo"></div><div class="photo"></div></div>
+      <div class="section"><strong>Now playing</strong><small>03 TRACKS</small></div>
+      <div class="track"><span>01 &nbsp; Soft focus</span><span>•••</span></div><div class="track"><span>02 &nbsp; Somewhere</span><span>•••</span></div>
+      <div class="mocknav">HOME &nbsp;&nbsp; PHOTOS &nbsp;&nbsp; + &nbsp;&nbsp; MUSIC</div>
+    </div>
+    <button type="button" data-choice="Editorial">Choose Editorial</button>
+  </article>
+</main>
+<div id="choice" aria-live="polite"></div>
+<script>
+document.querySelectorAll('[data-choice]').forEach(button=>button.addEventListener('click',()=>{
+  document.querySelectorAll('.demo').forEach(card=>card.classList.remove('selected'));
+  button.closest('.demo').classList.add('selected');
+  document.getElementById('choice').textContent=`Selected: ${button.dataset.choice}. Is style ka naam mujhe bata dena.`;
+}));
+</script>
+</body>
+</html>
